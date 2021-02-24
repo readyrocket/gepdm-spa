@@ -13,9 +13,7 @@ const _Container = styled.div`
   gap: 0;
   position: relative;
 
-  background-image: url("https://raw.githubusercontent.com/Lixlabs/react-app/60e4fc60b4204b2f65ab5c41eae4d646e2c2b957/public/images/background/icons.svg");
-  background-size: contain;
-
+  background: var(--primary-foreground);
 
   @media screen and (min-width: 920px){
     grid-template-rows: 7rem 1fr;
