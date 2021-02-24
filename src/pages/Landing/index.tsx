@@ -12,18 +12,12 @@ import { OpenButton } from './assets/OpenButton';
 import { ButtonSignUp } from './components/ButtonSignUp';
 import { NavigationBar } from './components/NavigationBar';
 import { Screen } from './styles';
-
-type NavBar = {
-	className: `m-navbar__inactive` | `m-navbar__active` | ``
-}
-
-type ButtonNavBar = {
-	className: `open` | `close`
-}
+import { ButtonNavBar } from './types/ButtonNavBar';
+import { NavBarClassName } from './types/NavBarClassName';
 
 function Landing() {
 	const [openButton, setOpenButton] = useState<ButtonNavBar>({ className: `open` });
-	const [openNavBar, setOpenNavBar] = useState<NavBar>({ className: `` });
+	const [openNavBar, setOpenNavBar] = useState<NavBarClassName>({ className: `` });
 
 	// SignIn
 	const [isVisibleSignInModal, setVisibleSignInModal] = useState(false);
@@ -47,7 +41,6 @@ function Landing() {
 		setVisibleSignUpModal((state) => !state);
 	}, []);
 
-
 	const checkNavigationBar = () => ({
 		hasOpeningButton: () => (
 			openButton.className === `open` ?
@@ -66,104 +59,100 @@ function Landing() {
 		checkNavigationBar().hasOpeningNavBar();
 	};
 
-
 	return (
-		<>
-			<Screen.layout.Base>
-				<Screen.layout.Header>
-					<Screen.with.Title>Deliverfy</Screen.with.Title>
+		<Screen.layout.Base>
+			<Screen.layout.Header>
+				<Screen.with.Title>Deliverfy</Screen.with.Title>
 
-					<Screen.with.TopNavBar>
-						<Link to="/entregador" className="s-navlink">
-							Entregador
-						</Link>
-						<Link to="/sobre" className="s-navlink">
-							Sobre
-						</Link>
-						<Link to="/contato" className="s-navlink">
-							Contato
-						</Link>
-					</Screen.with.TopNavBar>
+				<Screen.with.TopNavBar>
+					<Link to="/entregador" className="s-navlink">
+						Entregador
+					</Link>
+					<Link to="/sobre" className="s-navlink">
+						Sobre
+					</Link>
+					<Link to="/contato" className="s-navlink">
+						Contato
+					</Link>
+				</Screen.with.TopNavBar>
 
-					<Screen.with.GetInApplication>
-						<Screen.with.SignInButton
-							type="button"
-							onClick={handleShowSignInModal}
-						>
-							Login
-						</Screen.with.SignInButton>
-
-						<ButtonSignUp
-							onClick={handleShowSignUpModal}
-							type="button"
-						>
-							Cadastro
-						</ButtonSignUp>
-
-						<SignInScreen
-							visible={isVisibleSignInModal}
-							handleCancel={handleCancelSignInModal}
-						/>
-						<SignUpScreen
-							visible={isVisibleSignUpModal}
-							handleCancel={handleCancelSignUpModal}
-						/>
-					</Screen.with.GetInApplication>
-
-					<Screen.with.SmallMenu
+				<Screen.with.GetInApplication>
+					<Screen.with.SignInButton
 						type="button"
-						name="button navigation"
-						title="button navigation"
-						className="s-menu-btn s-mobile-bar"
-						onClick={handleNavationBar}
+						onClick={handleShowSignInModal}
 					>
-						<OpenButton openButtonBar={openButton} />
-						<CloseButton closeButtonBar={openButton} />
-					</Screen.with.SmallMenu>
+						Login
+					</Screen.with.SignInButton>
 
-				</Screen.layout.Header>
+					<ButtonSignUp
+						onClick={handleShowSignUpModal}
+						type="button"
+					>
+						Cadastro
+					</ButtonSignUp>
 
-				<NavigationBar
-					hasOpeningBar={openNavBar}
-					ShowSignInModal={handleShowSignInModal}
-					ShowSignUpModal={handleShowSignUpModal}
-				/>
+					<SignInScreen
+						visible={isVisibleSignInModal}
+						handleCancel={handleCancelSignInModal}
+					/>
+					<SignUpScreen
+						visible={isVisibleSignUpModal}
+						handleCancel={handleCancelSignUpModal}
+					/>
+				</Screen.with.GetInApplication>
 
-				<Screen.layout.Content>
-					<Screen.with.Welcome>
+				<Screen.with.SmallMenu
+					type="button"
+					name="button navigation"
+					title="button navigation"
+					className="s-menu-btn s-mobile-bar"
+					onClick={handleNavationBar}
+				>
+					<OpenButton openButtonBar={openButton} />
+					<CloseButton closeButtonBar={openButton} />
+				</Screen.with.SmallMenu>
 
-						<Screen.with.WelcomeTitle>Encontre sua {` `}
-							<span className="bold">
-								comida preferida{` `}
-							</span> pelo {` `}
-							<span className="bold">Deliverfy</span>
-						</Screen.with.WelcomeTitle>
+			</Screen.layout.Header>
 
-						<Screen.with.WelcomeDescription>
-							É rápido, simples e prático
-						</Screen.with.WelcomeDescription>
+			<NavigationBar
+				hasOpeningBar={openNavBar}
+				ShowSignInModal={handleShowSignInModal}
+				ShowSignUpModal={handleShowSignUpModal}
+			/>
 
-						<ButtonSignUp
-							onClick={handleShowSignUpModal}
-							type="button"
-							className="secondary"
-						>
-							COMEÇAR
-						</ButtonSignUp>
+			<Screen.layout.Content>
+				<Screen.with.Welcome>
 
-					</Screen.with.Welcome>
+					<Screen.with.WelcomeTitle>Encontre sua {` `}
+						<span className="bold">
+							comida preferida{` `}
+						</span> pelo {` `}
+						<span className="bold">Deliverfy</span>
+					</Screen.with.WelcomeTitle>
 
-					<Screen.with.WelcomeImage>
-						<Screen.with.Hamburger>
-							<img src={Hamburger} />
-						</Screen.with.Hamburger>
-					</Screen.with.WelcomeImage>
+					<Screen.with.WelcomeDescription>
+						É rápido, simples e prático
+					</Screen.with.WelcomeDescription>
 
-				</Screen.layout.Content>
+					<ButtonSignUp
+						onClick={handleShowSignUpModal}
+						type="button"
+						className="secondary"
+					>
+						COMEÇAR
+					</ButtonSignUp>
 
+				</Screen.with.Welcome>
 
-			</Screen.layout.Base>
-		</>
+				<Screen.with.WelcomeImage>
+					<Screen.with.Hamburger>
+						<img alt="hamburguer" loading="lazy" src={Hamburger} />
+					</Screen.with.Hamburger>
+				</Screen.with.WelcomeImage>
+
+			</Screen.layout.Content>
+
+		</Screen.layout.Base>
 	);
 }
 
