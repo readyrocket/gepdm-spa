@@ -29,7 +29,9 @@ const LocalizationModal = ({ visible, handleCancel }: AppProps) => {
 			showToastfy(SUCCESS_GET_POSITION).sucess();
 		};
 
-		const error = () => showToastfy(ERROR_GET_POSITION).error();
+		const error = () => {
+			showToastfy(ERROR_GET_POSITION).error();
+		};
 
 		const geolocation = navigator?.geolocation;
 
