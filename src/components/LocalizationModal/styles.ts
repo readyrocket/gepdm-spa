@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { flexCenter } from '../../../../styles/mixins';
+import { flexCenter } from '../../styles/mixins';
 
 const _Container = styled.section`
   ${flexCenter(`column nowrap`)}
