@@ -1,16 +1,16 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { Restaurant } from '../../@types/Homescreen';
+import { LocalizationModal } from '../../components/LocalizationModal';
 import RestaurantList from '../../components/RestaurantList';
 import { useScroll } from '../../hooks/useScroll';
-import { LocalizationModal } from './components/LocalizationModal';
 import { DATA } from './data';
 import { Screen } from './styles';
-import { TRestaurant } from './types';
 
 const Restaurants = () => {
 	const [cep, setCep] = useState(``);
-	const [data, setData] = useState<TRestaurant[]>([]);
+	const [data, setData] = useState<Restaurant[]>([]);
 	const [isModalVisible, setModalVisible] = useState(false);
 	const { scrollY } = useScroll();
 
@@ -21,13 +21,15 @@ const Restaurants = () => {
 	};
 
 	useEffect(() => {
-
 		handleShowModalLocalization();
 
 		const header = document.querySelector(`.header`);
 		if (scrollY >= 90) header?.classList.add(`nav-fixed`);
 
-		return () => header?.classList.remove(`nav-fixed`);
+		return () => {
+			header?.classList.remove(`nav-fixed`);
+			handleCancelModalSigIn();
+		};
 	}, [scrollY]);
 
 	const handleShowModalLocalization = () => {
