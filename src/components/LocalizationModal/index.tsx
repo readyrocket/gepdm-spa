@@ -33,7 +33,10 @@ const LocalizationModal = ({ visible, handleCancel }: AppProps) => {
 
 		const geolocation = navigator?.geolocation;
 
-		if (!geolocation) showToastfy(UNSUPPORTED_GEOLOCATION).warning();
+		if (!geolocation) {
+			showToastfy(UNSUPPORTED_GEOLOCATION).warning();
+			return;
+		}
 
 		geolocation.getCurrentPosition(
 			sucess,
